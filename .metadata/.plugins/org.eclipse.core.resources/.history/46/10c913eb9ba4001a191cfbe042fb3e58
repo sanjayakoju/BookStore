@@ -1,0 +1,24 @@
+package com.bookstore.security;
+
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class Role implements Serializable {
+
+	@Id
+	private int roleId;
+	
+	private String name;
+	
+	private Set<UserRole> userRoles=new HashSet<>();
+	
+	public Role()
+	{
+		
+	}
+}

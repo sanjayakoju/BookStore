@@ -1,0 +1,57 @@
+package com.bookstore.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.bookstore.models.Book;
+import com.bookstore.repository.BookRepository;
+
+@Service
+public class BookServiceImpl implements BookService{
+	
+	@Autowired
+	BookRepository bookRepository;
+
+	@Override
+	public List<Book> findAll() {
+		List<Book> bookList=(List<Book>)bookRepository.findAll();
+		
+		List<Book> activeBookList=new ArrayList<>();
+		for(Book book:bookList )
+		{
+			if(book.isActive())
+			{
+				activeBookList.add(book);
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public Book findOne() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Book save(Book book) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Book> blurrySearch(String title) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void removeOne(long id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

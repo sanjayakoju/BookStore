@@ -1,0 +1,14 @@
+package com.bookstore.security.config;
+
+import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
+
+@EnableRedisHttpSession
+public class HttpSessionConfig {
+	
+	@Bean
+	public LettuceConectionFactory connectionFactory()
+	{
+		return new LettuceConcetionFactory();
+	}
+
+}
