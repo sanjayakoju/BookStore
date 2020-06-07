@@ -1,6 +1,5 @@
 package com.bookstore.controller;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 
@@ -25,15 +24,15 @@ public class LoginController {
 	UserService userService;
 	
 	@RequestMapping("/token")
-	public Map<String, String> token(HttpSession session,HttpServletRequest request)
+	public Map<String,String> token(HttpSession session,HttpServletRequest request)
 	{
 		System.out.println(request.getRemoteHost());
 		
 		String remoteHost=request.getRemoteHost();
 		int portNumber=request.getRemotePort();
 		
-		System.out.println(remoteHost+":"+portNumber);
-		System.out.println(request.getRemoteAddr());
+		System.out.println("Remote Host"+remoteHost+" Port Number :"+portNumber);
+		System.out.println("Remote Address : "+request.getRemoteAddr());
 		
 		return Collections.singletonMap("token", session.getId());
 	}
