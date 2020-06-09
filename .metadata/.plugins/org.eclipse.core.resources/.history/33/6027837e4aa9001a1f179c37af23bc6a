@@ -1,0 +1,79 @@
+package com.bookstore.controller;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.bookstore.models.User;
+import com.bookstore.security.Role;
+import com.bookstore.security.UserRole;
+import com.bookstore.service.UserService;
+import com.bookstore.utility.MailConstuctor;
+import com.bookstore.utility.SecurityUtility;
+
+@RestController
+@RequestMapping("/user")
+public class UserController {
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private MailConstuctor mailConstuctor;
+	
+	@Autowired
+	private JavaMailSenderImpl mailSender;
+	
+	@PostMapping("/newUser")
+	public ResponseEntity addNewUser(HttpServletRequest request,@RequestBody HashMap<String, String> mapper) throws Exception
+	{
+		String username=mapper.get("username");
+		String email=mapper.get("email");
+		
+		if(userService.findByUsername(username)!=null)
+		{
+			return new ResponseEntity("Username Exists!",HttpStatus.BAD_REQUEST);
+		}
+		
+		if(userService.findByEmail(email)!=null)
+		{
+			return new ResponseEntity("Email Exists!",HttpStatus.BAD_REQUEST);
+		}
+		
+		User user=new User();
+		user.setUsername(username);
+		user.setEmail(email);
+		
+		String password=SecurityUtility.randomPasswor();
+		
+		String encryptedPassword=SecurityUtility.passwordEncoder().encode(password);
+		user.setPassword(encryptedPassword);
+		
+		Role role=new Role();
+		role.setRoleId(1);
+		role.setName("ROLE_USER");
+		Set<UserRole> userRole=new HashSet<>();
+		userRole.add(new UserRole(user,role));
+		userService.createUser(user, userRole);
+		
+		SimpleMailMessage email11=mailConstuctor.constructNewUserEmail(user,password);
+		mailSender(email11);
+		
+		return new ResponseEntity("User added successfully!",HttpStatus.OK);
+	}
+ 
+
+}

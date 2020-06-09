@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bookstore.service.UserService;
 
 @RestController
+//@CrossOrigin(origins = "http://localhost:4201")
 public class LoginController {
 
 	@Autowired

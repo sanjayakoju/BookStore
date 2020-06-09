@@ -1,0 +1,26 @@
+package com.bookstore.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.bookstore.models.UserPayment;
+import com.bookstore.repository.PaymentRepository;
+
+@
+public class PaymentServiceImpl implements PaymentService{
+	
+	@Autowired
+	PaymentRepository paymentRepository;
+
+	@Override
+	public UserPayment findById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void removeById(Long id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

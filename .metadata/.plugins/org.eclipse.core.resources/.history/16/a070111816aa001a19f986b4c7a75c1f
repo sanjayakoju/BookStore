@@ -1,0 +1,11 @@
+package com.bookstore.service;
+
+import com.bookstore.models.UserShipping;
+
+public interface ShippingService {
+
+	UserShipping findById(long id);
+	
+	void removeById(long id);
+
+}

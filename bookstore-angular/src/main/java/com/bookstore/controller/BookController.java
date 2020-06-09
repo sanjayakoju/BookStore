@@ -80,10 +80,10 @@ public class BookController {
 	public ResponseEntity deleteBookById(@PathVariable long id) throws IOException {
 
 		bookService.removeOne(id);
-		String fileName = id+".png";
+		String fileName = id + ".png";
 
 		// Delete Existing Image file
-		Files.delete(Paths.get("src/main/resources/static/image/book/"+fileName));
+		Files.delete(Paths.get("src/main/resources/static/image/book/" + fileName));
 		return new ResponseEntity("Remove Success!", HttpStatus.OK);
 	}
 
@@ -117,4 +117,12 @@ public class BookController {
 			return new ResponseEntity("Upload Image failed!", HttpStatus.BAD_REQUEST);
 		}
 	}
+
+	@PostMapping("/searchBook")
+	public List<Book> searchBook(@RequestBody String keyword) {
+		List<Book> bookList = bookService.blurrySearch(keyword);
+
+		return bookList;
+	}
+
 }

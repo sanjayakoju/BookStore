@@ -1,0 +1,12 @@
+package com.bookstore.service;
+
+import java.util.Optional;
+
+import com.bookstore.models.UserPayment;
+
+public interface PaymentService {
+
+	optionalPayment<UserPayment> findById(Long id);
+
+	void removeById(Long id);
+}

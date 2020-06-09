@@ -1,0 +1,27 @@
+package com.bookstore.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.bookstore.models.UserShipping;
+import com.bookstore.repository.ShippingRepository;
+
+@Service
+public class ShippingServiceImpl implements ShippingService{
+	
+	@Autowired
+	ShippingRepository shippingRepository;
+
+	@Override
+	public UserShipping findById(long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void removeById(long id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}
