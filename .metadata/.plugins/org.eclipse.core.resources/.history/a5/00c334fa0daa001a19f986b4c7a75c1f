@@ -1,8 +1,0 @@
-package com.bookstore.service;
-
-public interface PaymentService {
-
-UserPayment findById(Long id);
-	
-	void removeById(Long id);
-}

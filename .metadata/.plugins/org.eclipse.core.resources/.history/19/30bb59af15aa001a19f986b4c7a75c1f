@@ -1,7 +1,0 @@
-package com.bookstore.service;
-
-public interface ShippingService {
-
-	void removeById(long id);
-
-}
